@@ -43,6 +43,8 @@ if ! grep -q "buyfromus.io" docker-compose.yml; then
     sed -i "s/your_email@example.com/$EMAIL/g" docker-compose.yml.template
 else
     echo "Domain is already set. Skipping prompts."
+    DOMAIN=$(grep -oP '(?<=-d )[^ ]+' docker-compose.yml)
+    EMAIL=$(grep -oP '(?<=--email )[^ ]+' docker-compose.yml)
 fi
 
 # Check if the certificate files exist
@@ -57,7 +59,6 @@ if [ ! -f /etc/letsencrypt/live/$DOMAIN/fullchain.pem ] || [ ! -f /etc/letsencry
     fi
 else
     echo "SSL certificate files found."
-    echo "Domain is already set. Skipping prompts."
 fi
 
 echo "Configuration updated successfully."
