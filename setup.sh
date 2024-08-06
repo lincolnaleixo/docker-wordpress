@@ -38,4 +38,4 @@ sed -i '' "s/your_domain/$DOMAIN/g" docker-compose.yml
 echo "Configuration updated successfully."
 
 # Start Docker Compose services
-docker-compose up -d
+sudo docker compose up -d
