@@ -56,7 +56,7 @@ services:
       - certbot-etc:/etc/letsencrypt
       - ./letsencrypt:/var/lib/letsencrypt
       - ./letsencrypt/log:/var/log/letsencrypt
-    entrypoint: "/bin/sh -c 'trap exit TERM; certbot certonly --webroot --webroot-path=/var/www/certbot --email your_email@example.com --agree-tos --no-eff-email -d your_domain; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    entrypoint: "/bin/sh -c 'trap exit TERM; certbot certonly --standalone --preferred-challenges http --email your_email@example.com --agree-tos --no-eff-email -d your_domain; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
     networks:
       - wp_network
 
