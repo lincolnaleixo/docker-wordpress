@@ -19,7 +19,7 @@ END
 fi
 
 # Check if domain is already set in docker-compose.yml
-if grep -q "your_domain" docker-compose.yml; then
+if ! grep -q "your_domain" docker-compose.yml; then
     # Prompt for domain name
     read -p "Enter your domain name (e.g., example.com): " DOMAIN
 
