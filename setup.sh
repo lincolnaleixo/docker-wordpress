@@ -37,6 +37,10 @@ if ! grep -q "your_domain" docker-compose.yml; then
     # Update docker-compose.yml file
     sed -i "s/your_email@example.com/$EMAIL/g" docker-compose.yml
     sed -i "s/your_domain/$DOMAIN/g" docker-compose.yml
+
+    # Update certbot entrypoint in docker-compose.yml
+    sed -i "s/your_domain/$DOMAIN/g" docker-compose.yml.template
+    sed -i "s/your_email@example.com/$EMAIL/g" docker-compose.yml.template
 else
     echo "Domain is already set. Skipping prompts."
 fi
