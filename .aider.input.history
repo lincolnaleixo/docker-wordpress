@@ -1,0 +1,45 @@
+
+# 2024-08-06 16:44:22.677952
++check my 
+
+# 2024-08-06 16:46:47.193072
++i m creating a bash script to install docker on a new debian server and then configure a docker compose to run wordpress with certbot. pleae check my files and adjust it to work properly
+
+# 2024-08-06 16:47:06.405920
++new-docker.sh, docker-compose.yml, .env and nginx.conf
+
+# 2024-08-06 16:47:31.528191
++ok, forget lets start from fresh. please first create a docker-compose file that will have necessary services
+
+# 2024-08-06 16:48:16.320133
++please do that
+
+# 2024-08-06 16:49:17.284269
++please do create the .env file and nginx.conf
+
+# 2024-08-06 16:50:15.272435
++ok, now create some type of script that will ask the domain and other things needed (like domain name) to make the docker-compose works
+
+# 2024-08-06 16:51:15.077787
++great, make the original files a template so when running setup it doesnt change the original files
+
+# 2024-08-06 16:52:05.493421
++are you sure? it's creating a empty templaes
+
+# 2024-08-06 16:52:47.342792
++do you think .env.template is necessary? please remove it
+
+# 2024-08-06 17:24:14.054136
++can you confirm if it running for the first time the cert bot will be executed and will be getting the certificate for the domain requested?
+
+# 2024-08-06 17:24:44.277749
++ok, add on the setup to ask for the information required on the certbot
+
+# 2024-08-06 17:25:25.036199
++ok, also create the template for docker compose so when changing it change from the template
+
+# 2024-08-06 17:26:16.891991
++ok now please double check to make the certbot work in standalone mode
+
+# 2024-08-06 17:29:33.682575
++ok now on the setup also start the docker compose automatically after changing the configuration by the user. execute a docker-compose up
