@@ -32,6 +32,7 @@ services:
   nginx:
     depends_on:
       - wordpress
+      - certbot
     image: nginx:latest
     container_name: nginx
     restart: always
