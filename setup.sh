@@ -18,34 +18,30 @@ then
 END
 fi
 
-# Check if domain is already set in docker-compose.yml
-if ! grep -q "buyfromus.io" docker-compose.yml; then
-    # Prompt for domain name
+# Prompt for domain name and email address if not already set
+if [ -z "$DOMAIN" ]; then
     read -p "Enter your domain name (e.g., example.com): " DOMAIN
-
-    # Prompt for email address
-    read -p "Enter your email address for Certbot (e.g., user@example.com): " EMAIL
-
-    # Copy template files to their respective locations
-    cp docker-compose.yml.template docker-compose.yml
-    cp nginx.conf.template nginx.conf
-
-    # Update nginx.conf and nginx.conf.template files
-    sed -i "s/your_domain/$DOMAIN/g" nginx.conf
-    sed -i "s/your_domain/$DOMAIN/g" nginx.conf.template
-
-    # Update docker-compose.yml file
-    sed -i "s/your_email@example.com/$EMAIL/g" docker-compose.yml
-    sed -i "s/your_domain/$DOMAIN/g" docker-compose.yml
-
-    # Update certbot entrypoint in docker-compose.yml
-    sed -i "s/your_domain/$DOMAIN/g" docker-compose.yml.template
-    sed -i "s/your_email@example.com/$EMAIL/g" docker-compose.yml.template
-else
-    echo "Domain is already set. Skipping prompts."
-    DOMAIN=$(grep -oP '(?<=-d )[^ ]+' docker-compose.yml)
-    EMAIL=$(grep -oP '(?<=--email )[^ ]+' docker-compose.yml)
 fi
+
+if [ -z "$EMAIL" ]; then
+    read -p "Enter your email address for Certbot (e.g., user@example.com): " EMAIL
+fi
+
+# Copy template files to their respective locations
+cp docker-compose.yml.template docker-compose.yml
+cp nginx.conf.template nginx.conf
+
+# Update nginx.conf and nginx.conf.template files
+sed -i "s/your_domain/$DOMAIN/g" nginx.conf
+sed -i "s/your_domain/$DOMAIN/g" nginx.conf.template
+
+# Update docker-compose.yml file
+sed -i "s/your_email@example.com/$EMAIL/g" docker-compose.yml
+sed -i "s/your_domain/$DOMAIN/g" docker-compose.yml
+
+# Update certbot entrypoint in docker-compose.yml
+sed -i "s/your_domain/$DOMAIN/g" docker-compose.yml.template
+sed -i "s/your_email@example.com/$EMAIL/g" docker-compose.yml.template
 
 # Check if the certificate files exist
 if [ ! -f /etc/letsencrypt/live/$DOMAIN/fullchain.pem ] || [ ! -f /etc/letsencrypt/live/$DOMAIN/privkey.pem ]; then
