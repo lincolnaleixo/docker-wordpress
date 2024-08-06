@@ -20,3 +20,6 @@ sed -i '' "s/your_email@example.com/$EMAIL/g" docker-compose.yml
 sed -i '' "s/your_domain/$DOMAIN/g" docker-compose.yml
 
 echo "Configuration updated successfully."
+
+# Start Docker Compose services
+docker-compose up -d
