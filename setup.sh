@@ -1,7 +1,13 @@
 #!/bin/bash
 
+#!/bin/bash
+
 # Prompt for domain name
 read -p "Enter your domain name (e.g., example.com): " DOMAIN
+
+# Copy template files to their respective locations
+cp .env.template .env
+cp nginx.conf.template nginx.conf
 
 # Update .env file
 sed -i '' "s/your_domain/$DOMAIN/g" .env
