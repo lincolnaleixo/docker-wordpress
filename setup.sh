@@ -28,8 +28,9 @@ read -p "Enter your email address for Certbot (e.g., user@example.com): " EMAIL
 cp docker-compose.yml.template docker-compose.yml
 cp nginx.conf.template nginx.conf
 
-# Update nginx.conf file
+# Update nginx.conf and nginx.conf.template files
 sed -i '' "s/your_domain/$DOMAIN/g" nginx.conf
+sed -i '' "s/your_domain/$DOMAIN/g" nginx.conf.template
 
 # Update docker-compose.yml file
 sed -i '' "s/your_email@example.com/$EMAIL/g" docker-compose.yml
