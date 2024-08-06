@@ -48,13 +48,7 @@ if [ ! -f /etc/letsencrypt/live/$DOMAIN/fullchain.pem ] || [ ! -f /etc/letsencry
     echo "SSL certificate files not found. Attempting to generate certificates using Certbot..."
     echo "Using email: $EMAIL"
     echo "Using domain: $DOMAIN"
-    echo "Stopping Nginx to free up port 80 for Certbot..."
-    sudo docker stop nginx
-
-    sudo docker run --rm -v certbot-etc:/etc/letsencrypt -v certbot-var:/var/lib/letsencrypt -v certbot-log:/var/log/letsencrypt certbot/certbot certonly --standalone --preferred-challenges http --email "$EMAIL" --agree-tos --no-eff-email -d "$DOMAIN"
-
-    echo "Starting Nginx again..."
-    sudo docker start nginx
+    sudo docker run --rm -v certbot-etc:/etc/letsencrypt -v certbot-var:/var/lib/letsencrypt -v certbot-log:/var/log/letsencrypt -v $(pwd)/letsencrypt:/var/www/certbot certbot/certbot certonly --webroot -w /var/www/certbot --email "$EMAIL" --agree-tos --no-eff-email -d "$DOMAIN"
     if [ $? -ne 0 ]; then
         echo "Error: Failed to generate SSL certificates."
         exit 1
