@@ -6,11 +6,7 @@
 read -p "Enter your domain name (e.g., example.com): " DOMAIN
 
 # Copy template files to their respective locations
-cp .env.template .env
 cp nginx.conf.template nginx.conf
-
-# Update .env file
-sed -i '' "s/your_domain/$DOMAIN/g" .env
 
 # Update nginx.conf file
 sed -i '' "s/your_domain/$DOMAIN/g" nginx.conf
