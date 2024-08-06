@@ -45,6 +45,19 @@ else
     echo "Domain is already set. Skipping prompts."
 fi
 
+# Check if the certificate files exist
+if [ ! -f /etc/letsencrypt/live/$DOMAIN/fullchain.pem ] || [ ! -f /etc/letsencrypt/live/$DOMAIN/privkey.pem ]; then
+    echo "SSL certificate files not found. Attempting to generate certificates using Certbot..."
+    sudo docker run --rm -v certbot-etc:/etc/letsencrypt -v certbot-var:/var/lib/letsencrypt -v certbot-log:/var/log/letsencrypt certbot/certbot certonly --standalone --preferred-challenges http --email $EMAIL --agree-tos --no-eff-email -d $DOMAIN
+    if [ $? -ne 0 ]; then
+        echo "Error: Failed to generate SSL certificates."
+        exit 1
+    fi
+else
+    echo "SSL certificate files found."
+    echo "Domain is already set. Skipping prompts."
+fi
+
 echo "Configuration updated successfully."
 
 # Start Docker Compose services
