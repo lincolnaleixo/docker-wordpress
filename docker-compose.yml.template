@@ -48,8 +48,6 @@ services:
       - wp_network
 
   certbot:
-    depends_on:
-      - nginx
     image: certbot/certbot
     container_name: certbot
     volumes:
