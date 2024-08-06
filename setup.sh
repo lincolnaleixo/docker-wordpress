@@ -31,12 +31,12 @@ if ! grep -q "your_domain" docker-compose.yml; then
     cp nginx.conf.template nginx.conf
 
     # Update nginx.conf and nginx.conf.template files
-    sed -i '' "s/your_domain/$DOMAIN/g" nginx.conf
-    sed -i '' "s/your_domain/$DOMAIN/g" nginx.conf.template
+    sed -i "s/your_domain/$DOMAIN/g" nginx.conf
+    sed -i "s/your_domain/$DOMAIN/g" nginx.conf.template
 
     # Update docker-compose.yml file
-    sed -i '' "s/your_email@example.com/$EMAIL/g" docker-compose.yml
-    sed -i '' "s/your_domain/$DOMAIN/g" docker-compose.yml
+    sed -i "s/your_email@example.com/$EMAIL/g" docker-compose.yml
+    sed -i "s/your_domain/$DOMAIN/g" docker-compose.yml
 else
     echo "Domain is already set. Skipping prompts."
 fi
