@@ -13,7 +13,9 @@ then
     sudo apt-get update
     sudo apt-get install -y docker-ce docker-ce-cli containerd.io
     sudo usermod -aG docker $USER
-    newgrp docker
+    newgrp docker << END
+    exec "$0" "$@"
+END
 fi
 
 # Prompt for domain name
